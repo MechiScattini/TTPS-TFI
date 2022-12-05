@@ -36,8 +36,14 @@
       <%= link_to "Edit this appointment", edit_appointment_path(@appointment) %>
       <%= button_to "Destroy this appointment", @appointment, method: :delete %>
     <% end %>
-  <% else %>
-    <%= link_to "Edit this appointment", edit_appointment_path(@appointment) %> 
+  <% end %>
+
+  <% if current_user.role == "admin"%>
+    <%= link_to "Edit this appointment", edit_appointment_path(@appointment) %>
+  <% end %>
+
+  <% if current_user.role == "bank_personal"%>
+    <%= link_to "Solve this appointment", edit_appointment_path(@appointment) %>
   <% end %>
 
   <%= link_to "Back to appointments", appointments_path %>

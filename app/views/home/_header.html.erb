@@ -24,11 +24,10 @@
           </li>
           <% end %>
 
-          <% if current_user.role == "admin" %>
+          <% if current_user.role == "admin" or current_user.role == "bank_personal" %>
             <li class="nav-item">
               <%= link_to 'Branches', branches_path, class: "nav-link"%>
             </li>
-
           <%end%>
 
           <li>

@@ -3,8 +3,10 @@
 <%= render @branch %>
 
 <div>
-  <%= link_to "Edit this branch", edit_branch_path(@branch) %> |
+  <% if current_user.role == "admin" %>
+    <%= link_to "Edit this branch", edit_branch_path(@branch) %> |
+    <%= button_to "Destroy this branch", @branch, method: :delete %>
+  <% end %>
+  
   <%= link_to "Back to branches", branches_path %>
-
-  <%= button_to "Destroy this branch", @branch, method: :delete %>
 </div>

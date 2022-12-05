@@ -26,6 +26,8 @@
     </tbody>
   </table>
 </div>
-<button type="button" class="btn btn-dark">
-  <%= link_to "New branch", new_branch_path %>
-</button>
+<% if current_user.role == "admin" %>
+  <button type="button" class="btn btn-dark">
+    <%= link_to "New branch", new_branch_path %>
+  </button>
+<% end %>
