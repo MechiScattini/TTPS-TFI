@@ -1,7 +1,10 @@
 <p style="color: green"><%= notice %></p>
 
 <div>
-
+  <p>
+    Branch:
+    <%= (Branch.find_by id: @appointment.branch_id).name  %>
+  </p>
   <p>
     Date:
     <%= @appointment.date %>
@@ -30,13 +33,14 @@
 <div>
   <% if current_user.role == "client"%>
     <% if !@appointment.solved %>
-      <%= link_to "Edit this appointment", edit_appointment_path(@appointment) %> |
+      <%= link_to "Edit this appointment", edit_appointment_path(@appointment) %>
+      <%= button_to "Destroy this appointment", @appointment, method: :delete %>
     <% end %>
   <% else %>
-    <%= link_to "Edit this appointment", edit_appointment_path(@appointment) %> |
+    <%= link_to "Edit this appointment", edit_appointment_path(@appointment) %> 
   <% end %>
 
   <%= link_to "Back to appointments", appointments_path %>
 
-  <%= button_to "Destroy this appointment", @appointment, method: :delete %>
+
 </div>

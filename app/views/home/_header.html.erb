@@ -18,12 +18,6 @@
 
         <% else %>
 
-          <% if current_user.role == "client" %>
-            <li class="nav-item">
-              <%= link_to 'New appointment', new_appointment_path, class: "nav-link"%>
-            </li>
-          <% end %>
-
           <% if current_user.role == "client" or current_user.role == "bank_personal" %>
           <li class="nav-item">
             <%= link_to 'Appointments', appointments_path, class: "nav-link"%>
@@ -34,7 +28,7 @@
             <li class="nav-item">
               <%= link_to 'Branches', branches_path, class: "nav-link"%>
             </li>
-            
+
           <%end%>
 
           <li>

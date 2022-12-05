@@ -1,17 +1,18 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Appointments</h1>
-
 <div id="appointments">
 
   <% if current_user.role == "client" %>
+    <h1>Your appointments</h1>
     <% current_user.appointments.each do |appointment| %>
       <%= render appointment %>
       <p>
         <%= link_to "Show this appointment", appointment %>
       </p>
     <% end %>
+    <%= link_to "New appointment", new_appointment_path %>
   <% else %>
+    <h1>Appointments</h1>
     <% @appointments.each do |appointment| %>
       <%= render appointment %>
       <p>
@@ -19,6 +20,5 @@
       </p>
     <% end %>
   <% end %>
-</div>
 
-<%= link_to "New appointment", new_appointment_path %>
+</div>
