@@ -5,21 +5,27 @@ class Ability
 
   def initialize(user)
 
-    return unless user.role == "client"
-    can :create, Appointment
-    can :read, Appointment, user_id:user.id
-    can :update, Appointment, solved:false, user_id:user.id
-    can :destroy, Appointment, solved:false, user_id:user.id
-
-
-    return unless user.role == "bank_personal"
-    can :read, Branch
-    can :read, Appointment
-    can :read, User, role:"client"
-
-    return unless user.role == "admin"
-    can :manage, Branch
-    can :manage, User
+    if user.role == "admin"
+      return unless user.role == "admin"
+      can :destroy, User do |other_user|
+        other_user.id!=user.id
+      end
+      can :manage, :all
+    elsif user.role == "bank_personal"
+      return unless user.role == "bank_personal"
+      can :read, Branch
+      can :read, Appointment
+      can :update, Appointment
+      can :read, User, role:"client"
+    else
+      return unless user.role == "client"
+      can :create, Appointment
+      can :read, Appointment, user_id:user.id
+      can :update, Appointment, solved:false, user_id:user.id
+      can :destroy, Appointment, solved:false, user_id:user.id
+      can :read, User, user_id:user.id
+      can :update, User, user_id:user.id
+    end
     # Define abilities for the user here. For example:
     #
     #   return unless user.present?
