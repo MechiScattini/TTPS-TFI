@@ -8,8 +8,8 @@ class Ability
     return unless user.role == "client"
     can :create, Appointment
     can :read, Appointment, user_id:user.id
-    can :update, Appointment, solved:false
-    can :destroy, Appointment, solved:false
+    can :update, Appointment, solved:false, user_id:user.id
+    can :destroy, Appointment, solved:false, user_id:user.id
 
 
     return unless user.role == "bank_personal"
