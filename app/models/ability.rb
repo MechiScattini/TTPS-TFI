@@ -4,6 +4,22 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+
+    return unless user.role == "client"
+    can :create, Appointment
+    can :read, Appointment, user_id:user.id
+    can :update, Appointment, solved:false
+    can :destroy, Appointment, solved:false
+
+
+    return unless user.role == "bank_personal"
+    can :read, Branch
+    can :read, Appointment
+    can :read, User, role:"client"
+
+    return unless user.role == "admin"
+    can :manage, Branch
+    can :manage, User
     # Define abilities for the user here. For example:
     #
     #   return unless user.present?
