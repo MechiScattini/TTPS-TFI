@@ -3,11 +3,21 @@
 <h1>Appointments</h1>
 
 <div id="appointments">
-  <% @appointments.each do |appointment| %>
-    <%= render appointment %>
-    <p>
-      <%= link_to "Show this appointment", appointment %>
-    </p>
+
+  <% if current_user.role == "client" %>
+    <% current_user.appointments.each do |appointment| %>
+      <%= render appointment %>
+      <p>
+        <%= link_to "Show this appointment", appointment %>
+      </p>
+    <% end %>
+  <% else %>
+    <% @appointments.each do |appointment| %>
+      <%= render appointment %>
+      <p>
+        <%= link_to "Show this appointment", appointment %>
+      </p>
+    <% end %>
   <% end %>
 </div>
 

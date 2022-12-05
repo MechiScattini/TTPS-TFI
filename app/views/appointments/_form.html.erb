@@ -12,6 +12,11 @@
   <% end %>
 
   <div>
+      <%= form.label :branches, style: "display: block" %>
+      <%= collection_select(:appointment, :branch_id, Branch.all, :id, :name, prompt: true) %>
+  </div>
+
+  <div>
     <%= form.label :date, style: "display: block" %>
     <%= form.date_field :date %>
   </div>
@@ -24,11 +29,6 @@
   <div>
     <%= form.label :motive, style: "display: block" %>
     <%= form.text_field :motive %>
-  </div>
-
-  <div>
-    <%= form.label :solved, style: "display: block" %>
-    <%= form.check_box :solved %>
   </div>
 
   <div>

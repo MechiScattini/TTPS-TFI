@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'user/index'
   resources :appointments
   devise_for :users
   root 'home#index'

@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   enum role: [:client, :bank_personal, :admin]
   after_initialize :set_default_role, :if => :new_record?
+  has_many :appointments
 
   def set_default_role
     self.role ||= :client
