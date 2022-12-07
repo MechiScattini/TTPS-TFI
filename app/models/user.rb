@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   enum role: [:client, :bank_personal, :admin]
+
   after_initialize :set_default_role, :if => :new_record?
   has_many :appointments
   validates :branch_id, presence: true, if: :is_personal?
