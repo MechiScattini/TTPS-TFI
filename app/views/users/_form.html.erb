@@ -31,7 +31,7 @@
 
   <div class="field">
       <%= f.label :role, style: "display: block" %>
-      <%= f.select :role, User.roles.keys.map { |key, value| [key.humanize, key] } %>
+      <%= f.select :role, User.roles.keys.reject{|enum| enum=="client"}.map{ |key, value| [key.humanize, key] } %>
   </div>
 
   <div class="actions">
