@@ -25,7 +25,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     respond_to do |format|
-      if @User.save
+      if @user.save
         format.html { redirect_to user_url(@user), notice: "User was successfully created." }
         format.json { render :show, status: :created, location: @user }
       else
@@ -72,6 +72,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.permit(:email, :password, :password_confirmation, :role)
+      params.require(:user).permit(:email, :password, :password_confirmation, :role)
     end
 end

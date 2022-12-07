@@ -6,9 +6,15 @@ class User < ApplicationRecord
   enum role: [:client, :bank_personal, :admin]
   after_initialize :set_default_role, :if => :new_record?
   has_many :appointments
+  validates :branch_id, presence: true, if: :is_personal?
 
   def set_default_role
     self.role ||= :client
+  end
+
+  private
+  def is_personal?
+    self.role == "bank_personal"
   end
 
 end
