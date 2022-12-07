@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   load_and_authorize_resource
 
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
   # GET /branches or /branches.json
   def index
     @users = User.all
@@ -56,6 +58,12 @@ class UsersController < ApplicationController
     end
   end
 
+  protected
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:role])
+    # devise_parameter_sanitizer.for(:account_update) {| u | u.permit(:role, :email, :password, :current_password) }
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -64,6 +72,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.permit(:email)
+      params.permit(:email, :password, :password_confirmation, :role)
     end
 end

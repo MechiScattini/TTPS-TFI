@@ -10,7 +10,9 @@ class Ability
       can :destroy, User do |other_user|
         other_user.id!=user.id
       end
-      can :manage, :all
+      can :manage, User
+      can :manage, Branch
+
     elsif user.role == "bank_personal"
       return unless user.role == "bank_personal"
       can :read, Branch

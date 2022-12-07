@@ -1,6 +1,7 @@
 class BranchesController < ApplicationController
   load_and_authorize_resource
   before_action :set_branch, only: %i[ show edit update destroy ]
+  before_action :check_appointments, only: %i[ destroy ]
 
   # GET /branches or /branches.json
   def index
@@ -67,5 +68,15 @@ class BranchesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def branch_params
       params.require(:branch).permit(:name, :address, :telephone)
+    end
+
+    def check_appointments
+      respond_to do |format|
+        if Appointment.all.select{|a| a.branch_id == @branch.id}.any?
+          #@branch.errors.add(:appointments, "Can't destroy, there are appoinments")
+          format.html { redirect_to branch_url(@branch), notice: "Branch cannot be destroyed, it has appointments." }
+          format.json { head :no_content }
+        end
+      end
     end
 end
