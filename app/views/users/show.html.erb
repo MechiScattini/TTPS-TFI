@@ -6,7 +6,9 @@
 
 <div>
   <% if current_user.role == "admin" %>
-    <%= link_to "Edit this user", edit_user_path(@user) %> |
+    <% if @user.role != "client" %>
+      <%= link_to "Edit this user", edit_user_path(@user) %> |
+    <% end %>
     <% if @user.id != current_user.id %>
       <%= button_to "Destroy this user", @user, method: :delete %>
     <% end %>
