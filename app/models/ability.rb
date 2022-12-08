@@ -16,7 +16,7 @@ class Ability
     elsif user.role == "bank_personal"
       return unless user.role == "bank_personal"
       can :read, Branch
-      can :read, Appointment
+      can :read, Appointment, branch_id: user.branch_id
       can :update, Appointment
       can :read, User, role:"client"
     else
