@@ -1,4 +1,9 @@
-<h1>Editing appointment</h1>
+
+<% if current_user.role == "bank_personal"%>
+  <h1>Solving appointment</h1>
+<% else %>
+  <h1>Editing appointment</h1>
+<% end %>
 
 <%= render "form", appointment: @appointment %>
 

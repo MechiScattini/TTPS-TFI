@@ -39,6 +39,10 @@ class AppointmentsController < ApplicationController
 
   # PATCH/PUT /appointments/1 or /appointments/1.json
   def update
+    if current_user.role == "bank_personal"
+      @appointment.users << current_user
+      @appointment.solved = true
+    end
     respond_to do |format|
       if @appointment.update(appointment_params)
         format.html { redirect_to appointment_url(@appointment), notice: "Appointment was successfully updated." }
@@ -60,18 +64,6 @@ class AppointmentsController < ApplicationController
     end
   end
 
-  def solve_appointment
-    respond_to do |format|
-      if @appointment.update(appointment_params)
-
-        format.html { redirect_to appointment_url(@appointment), notice: "Appointment was successfully updated." }
-        format.json { render :show, status: :ok, location: @appointment }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @appointment.errors, status: :unprocessable_entity }
-      end
-    end
-  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

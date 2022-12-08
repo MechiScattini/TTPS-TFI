@@ -12,16 +12,9 @@ class User < ApplicationRecord
     self.role ||= :client
   end
 
-  def can_read?(appointment_id)
-
-    self.id.in?Appointment.find(appointment_id).users
-  end
-
   private
   def is_personal?
     self.role == "bank_personal"
   end
-
-
 
 end
