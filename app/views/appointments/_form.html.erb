@@ -30,11 +30,12 @@
     <%= form.label :motive, style: "display: block" %>
     <%= form.text_field :motive %>
   </div>
-
-  <div>
-    <%= form.label :comment, style: "display: block" %>
-    <%= form.text_field :comment %>
-  </div>
+  <% if current_user.role == "bank_personal" %>
+    <div>
+      <%= form.label :comment, style: "display: block" %>
+      <%= form.text_field :comment %>
+    </div>
+  <% end %>
 
   <div>
     <%= form.submit %>

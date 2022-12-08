@@ -1,24 +1,65 @@
 <p style="color: green"><%= notice %></p>
 
 <div id="appointments">
-
   <% if current_user.role == "client" %>
     <h1>Your appointments</h1>
-    <% current_user.appointments.each do |appointment| %>
-      <%= render appointment %>
-      <p>
-        <%= link_to "Show this appointment", appointment %>
-      </p>
-    <% end %>
-    <%= link_to "New appointment", new_appointment_path %>
   <% else %>
     <h1>Appointments</h1>
-    <% @appointments.reject{|appointment| appointment.branch_id != current_user.branch_id}.each do |appointment|  %>
-      <%= render appointment %>
-      <p>
-        <%= link_to "Show this appointment", appointment %>
-      </p>
-    <% end %>
+  <% end %>
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr class="table-dark">
+        <th scope="col">#</th>
+        <th scope="col">Date</th>
+        <th scope="col">Time</th>
+        <th scope="col">Motive</th>
+        <th scope="col">Status</th>
+        <th scope="col">Comment</th>
+        <th scope="col">Options</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% if current_user.role == "client" %>
+        <% current_user.appointments.each_with_index do |appointment, index| %>
+          <tr>
+            <th scope="row"><%= index + 1 %></th>
+            <td><%= appointment.date %></td>
+            <td><%= appointment.time %></td>
+            <td><%= appointment.motive %></td>
+            <% if appointment.solved %>
+              <td>solved</td>
+            <% else %>
+              <td>unsolved</td>
+            <% end %>
+            <td><%= appointment.comment %></td>
+            <td><%= link_to "Show this appointment", appointment %></td>
+          </tr>
+        <% end %>
+      <% else %>
+        <% @appointments.reject{|appointment| appointment.branch_id != current_user.branch_id}.each_with_index do |appointment, index| %>
+          <tr>
+            <th scope="row"><%= index + 1 %></th>
+            <td><%= appointment.date %></td>
+            <td><%= appointment.time %></td>
+            <td><%= appointment.motive %></td>
+            <% if appointment.solved %>
+              <td>solved</td>
+            <% else %>
+              <td>unsolved</td>
+            <% end %>
+            <td><%= appointment.comment %></td>
+            <td><%= link_to "Show this appointment", appointment %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+
+  <% if current_user.role == "client" %>
+    <button type="button" class="btn btn-dark">
+      <%= link_to "New appointment", new_appointment_path %>
+    </button>
   <% end %>
 
 </div>
