@@ -1,5 +1,11 @@
 <h1>Home#index</h1>
 <% if current_user %>
 	<p>You are a [<%= current_user.role %>]</p>
+	<% if current_user.role == "bank_personal" %>
+	<% Branch.all.reject{ |branch| branch.id != current_user.branch_id}.each do |branch| %>
+		<p>Your branch is [<%= branch.name %>]</p>
+	<%end%>
+
+	<% end%>
 <% end %>
 <p>Find me in app/views/home/index.html.erb</p>

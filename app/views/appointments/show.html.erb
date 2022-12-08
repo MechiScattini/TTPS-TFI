@@ -2,20 +2,20 @@
 
 <div>
   <p>
-    Branch:
+    <strong>Branch: </strong>
     <%= (Branch.find_by id: @appointment.branch_id).name  %>
   </p>
   <p>
-    Date:
+    <strong>Date: </strong>
     <%= @appointment.date %>
   </p>
   <p>
-    Motive:
+    <strong>Motive: </strong>
     <%= @appointment.motive %>
   </p>
 
   <p>
-    State:
+    <strong>Status: </strong>
     <% if @appointment.solved %>
       solved
     <% else %>
@@ -24,7 +24,7 @@
   </p>
 
   <p>
-    Comment:
+    <strong>Comment: </strong>
     <%= @appointment.comment %>
   </p>
 

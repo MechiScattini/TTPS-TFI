@@ -13,7 +13,7 @@
     <%= link_to "New appointment", new_appointment_path %>
   <% else %>
     <h1>Appointments</h1>
-    <% @appointments.each do |appointment| %>
+    <% @appointments.reject{|appointment| appointment.branch_id != current_user.branch_id}.each do |appointment|  %>
       <%= render appointment %>
       <p>
         <%= link_to "Show this appointment", appointment %>
