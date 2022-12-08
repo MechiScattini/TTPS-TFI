@@ -22,9 +22,15 @@ class Ability
     else
       return unless user.role == "client"
       can :create, Appointment
-      can :read, Appointment, user_id:user.id
-      can :update, Appointment, solved:false, user_id:user.id
-      can :destroy, Appointment, solved:false, user_id:user.id
+      can :read, Appointment do |appointment|
+        !appointment.users.include?user.id
+      end
+      can :update, Appointment do |appointment|
+        appointment.solved == false and !appointment.users.include?user.id
+      end
+      can :destroy, Appointment do |appointment|
+        appointment.solved == false and !appointment.users.include?user.id
+      end
       can :read, User, user_id:user.id
       can :update, User, user_id:user.id
     end

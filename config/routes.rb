@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :appointments
+  get '/solve/appointment', to: 'appointments#solve_appointment'
   devise_for :users
   resources :users, path: '/users_admin'
   post 'create_user' => 'users#create', as: :create_user

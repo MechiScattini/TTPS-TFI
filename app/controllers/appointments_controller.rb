@@ -23,7 +23,7 @@ class AppointmentsController < ApplicationController
   # POST /appointments or /appointments.json
   def create
     @appointment = Appointment.new(appointment_params)
-    @appointment.user_id = current_user.id
+    @appointment.users << current_user
     @appointment.solved = false
 
     respond_to do |format|
@@ -57,6 +57,19 @@ class AppointmentsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to appointments_url, notice: "Appointment was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  def solve_appointment
+    respond_to do |format|
+      if @appointment.update(appointment_params)
+
+        format.html { redirect_to appointment_url(@appointment), notice: "Appointment was successfully updated." }
+        format.json { render :show, status: :ok, location: @appointment }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @appointment.errors, status: :unprocessable_entity }
+      end
     end
   end
 

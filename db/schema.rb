@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_07_214458) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_08_152205) do
   create_table "appointments", force: :cascade do |t|
     t.date "date"
     t.time "time"
@@ -19,10 +19,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_07_214458) do
     t.string "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id", null: false
     t.integer "branch_id", null: false
     t.index ["branch_id"], name: "index_appointments_on_branch_id"
-    t.index ["user_id"], name: "index_appointments_on_user_id"
+  end
+
+  create_table "appointments_users", id: false, force: :cascade do |t|
+    t.integer "appointment_id", null: false
+    t.integer "user_id", null: false
   end
 
   create_table "branches", force: :cascade do |t|
@@ -49,6 +52,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_07_214458) do
   end
 
   add_foreign_key "appointments", "branches"
-  add_foreign_key "appointments", "users"
   add_foreign_key "users", "branches"
 end

@@ -5,16 +5,23 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   enum role: [:client, :bank_personal, :admin]
   after_initialize :set_default_role, :if => :new_record?
-  has_many :appointments
+  has_and_belongs_to_many :appointments
   validates :branch_id, presence: true, if: :is_personal?
 
   def set_default_role
     self.role ||= :client
   end
 
+  def can_read?(appointment_id)
+
+    self.id.in?Appointment.find(appointment_id).users
+  end
+
   private
   def is_personal?
     self.role == "bank_personal"
   end
+
+
 
 end

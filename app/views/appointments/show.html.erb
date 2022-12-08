@@ -43,7 +43,7 @@
   <% end %>
 
   <% if current_user.role == "bank_personal"%>
-    <%= link_to "Solve this appointment", edit_appointment_path(@appointment) %>
+    <%= link_to "Solve this appointment", solve_appointment_path(@appointment) %>
   <% end %>
 
   <%= link_to "Back to appointments", appointments_path %>
