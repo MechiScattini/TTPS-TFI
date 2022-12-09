@@ -9,6 +9,7 @@
         <th scope="col">Name</th>
         <th scope="col">Address</th>
         <th scope="col">Telephone</th>
+        <th scope="col">Schedules</th>
         <th scope="col">Options</th>
       </tr>
     </thead>
@@ -20,6 +21,17 @@
           <td><%= branch.name %></td>
           <td><%= branch.address %></td>
           <td><%= branch.telephone %></td>
+          <% if branch.schedules.empty?%>
+            <td></td>
+          <%else%>
+            <td>
+              <% branch.schedules.each do |schedule|%>
+                <%= schedule.day %>:
+                <%= schedule.time_from.strftime "%H:%M" %>hs -
+                <%= schedule.time_to.strftime "%H:%M" %>hs,
+              <% end %>
+            </td>
+          <% end %>
           <td><%= link_to "Show this branch", branch %></td>
         </tr>
       <% end %>
