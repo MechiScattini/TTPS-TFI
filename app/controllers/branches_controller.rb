@@ -50,6 +50,7 @@ class BranchesController < ApplicationController
 
   # DELETE /branches/1 or /branches/1.json
   def destroy
+    Schedule.delete(@branch.id)
     @branch.destroy
 
     respond_to do |format|
@@ -72,9 +73,10 @@ class BranchesController < ApplicationController
     def check_appointments
       respond_to do |format|
         if Appointment.all.select{|a| a.branch_id == @branch.id}.any?
-          #@branch.errors.add(:appointments, "Can't destroy, there are appoinments")
           format.html { redirect_to branch_url(@branch), notice: "Branch cannot be destroyed, it has appointments." }
           format.json { head :no_content }
+        else
+          destroy
         end
       end
     end

@@ -12,6 +12,7 @@ class Ability
       end
       can :manage, User
       can :manage, Branch
+      can :manage, Schedule
 
     elsif user.role == "bank_personal"
       return unless user.role == "bank_personal"

@@ -32,7 +32,11 @@
               <% end %>
             </td>
           <% end %>
-          <td><%= link_to "Show this branch", branch %></td>
+          <td>
+            <%= link_to "Show this branch", branch %>
+            <%= link_to "Edit this branch", edit_branch_path(branch) %>
+            <%= button_to "Destroy this branch", branch, method: :delete %>
+          </td>
         </tr>
       <% end %>
     </tbody>
