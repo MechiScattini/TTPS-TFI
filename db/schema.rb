@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_09_115727) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_09_152319) do
   create_table "appointments", force: :cascade do |t|
     t.date "date"
     t.time "time"
@@ -20,7 +20,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_09_115727) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "branch_id", null: false
+    t.integer "schedule_id", null: false
     t.index ["branch_id"], name: "index_appointments_on_branch_id"
+    t.index ["schedule_id"], name: "index_appointments_on_schedule_id"
   end
 
   create_table "appointments_users", id: false, force: :cascade do |t|
@@ -65,5 +67,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_09_115727) do
   end
 
   add_foreign_key "appointments", "branches"
+  add_foreign_key "appointments", "schedules"
   add_foreign_key "users", "branches"
 end

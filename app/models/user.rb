@@ -12,7 +12,6 @@ class User < ApplicationRecord
     self.role ||= :client
   end
 
-  private
   def is_personal?
     self.role == "bank_personal"
   end

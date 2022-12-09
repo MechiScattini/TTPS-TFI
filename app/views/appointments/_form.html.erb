@@ -11,10 +11,19 @@
     </div>
   <% end %>
   <% if current_user.role == "client" %>
-    <div>
-        <%= form.label :branches, style: "display: block" %>
-        <%= collection_select(:appointment, :branch_id, Branch.all, :id, :name, prompt: true) %>
-    </div>
+
+      <div data-controller="form-element">
+        <div class="field">
+            <%= form.label :branches, style: "display: block" %>
+            <%= form.select :branch_id, Branch.all.map{ |b| [b.name, b.id] }, {include_blank:true},{data:{action:"change->form-element#remotesubmit"}} %>
+        </div>
+        <%= form.button "A", formaction: new_appointment_path, formmethod: :get, data:{ form_element_target:"submitbtn"}%>
+      </div>
+
+    <%if appointment.schedules.any? %>
+      <%= form.label :schedule, style: "display: block" %>
+      <%= form.select :schedule, appointment.schedules.map{ |b| [b.day, b.id] } %>
+    <% end %>
 
     <div>
       <%= form.label :date, style: "display: block" %>
@@ -31,6 +40,7 @@
       <%= form.text_field :motive %>
     </div>
   <% end %>
+
   <% if current_user.role == "bank_personal" %>
     <div>
       <%= form.label :comment, style: "display: block" %>

@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 
   # GET /branches/new
   def new
-    @user = User.new
+    @user = User.new user_params
   end
 
   # GET /branches/1/edit
@@ -72,6 +72,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation, :role, :branch_id)
+      params.fetch(:user, {}).permit(:email, :password, :password_confirmation, :role, :branch_id)
     end
 end

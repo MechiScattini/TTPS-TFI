@@ -29,15 +29,23 @@
     <%= f.password_field :password_confirmation%>
   </div>
 
-  <div class="field">
-      <%= f.label :role, style: "display: block" %>
-      <%= f.select :role, User.roles.keys.reject{|enum| enum=="client"}.map{ |key, value| [key.humanize, key] } %>
+  <div data-controller="form-element">
+
+    <div class="field">
+        <%= f.label :role, style: "display: block" %>
+        <%= f.select :role, User.roles.keys.reject{|enum| enum=="client"}.map{ |key, value| [key.humanize, key] }, {include_blank:true},{data:{action:"change->form-element#remotesubmit"}} %>
+    </div>
+    <%= f.button "See branches", formaction: new_user_path, formmethod: :get, data:{ form_element_target:"submitbtn"}%>
+
   </div>
 
-  <div>
-      <%= f.label :branches, style: "display: block" %>
-      <%= collection_select(:user, :branch_id, Branch.all, :id, :name, prompt: true) %>
-  </div>
+  <% if user.is_personal?%>
+    <div>
+        <%= f.label :branches, style: "display: block" %>
+        <%= collection_select(:user, :branch_id, Branch.all, :id, :name, prompt: true) %>
+    </div>
+  <% end %>
+
 
   <div class="actions">
     <%= f.submit %>
