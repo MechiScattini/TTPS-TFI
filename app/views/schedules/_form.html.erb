@@ -11,9 +11,9 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :day, style: "display: block" %>
-    <%= form.number_field :day %>
+  <div class="field">
+      <%= form.label :day, style: "display: block" %>
+      <%= form.select :day, Schedule.days.keys.map{ |key, value| [key.humanize, key] } %>
   </div>
 
   <div>
