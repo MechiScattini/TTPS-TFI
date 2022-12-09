@@ -19,8 +19,8 @@
           <tr>
             <th scope="row"><%= index + 1 %></th>
             <td><%= schedule.day %></td>
-            <td><%= schedule.time_from %></td>
-            <td><%= schedule.time_to %></td>
+            <td><%= schedule.time_from.strftime "%H:%M" %></td>
+            <td><%= schedule.time_to.strftime "%H:%M" %></td>
             <td><%= link_to "Show this schedule", schedule %></td>
           </tr>
       <% end %>

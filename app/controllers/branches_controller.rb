@@ -24,7 +24,6 @@ class BranchesController < ApplicationController
   # POST /branches or /branches.json
   def create
     @branch = Branch.new(branch_params)
-
     respond_to do |format|
       if @branch.save
         format.html { redirect_to branch_url(@branch), notice: "Branch was successfully created." }
@@ -67,7 +66,7 @@ class BranchesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def branch_params
-      params.require(:branch).permit(:name, :address, :telephone)
+      params.require(:branch).permit(:name, :address, :telephone, :schedule_ids => [])
     end
 
     def check_appointments

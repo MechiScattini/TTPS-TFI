@@ -27,6 +27,22 @@
   </div>
 
   <div>
+    <%= form.label :schedules, style: "display: block" %>
+    <% for schedule in Schedule.all %>
+      <%= check_box_tag "branch[schedule_ids][]", schedule.id, @branch.schedules.include?(schedule) %>
+      Day:
+      <%=h schedule.day%>
+      From
+      <%=h schedule.time_from.strftime "%H:%M"%>
+      hs
+      To
+      <%=h schedule.time_to.strftime "%H:%M"%>
+      hs
+      <br/>
+    <% end %>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>
