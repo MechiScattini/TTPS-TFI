@@ -21,19 +21,18 @@
       </div>
 
     <%if appointment.schedules.any? %>
+      <div>
+        <%= form.label :date, style: "display: block" %>
+        <%= form.date_field :date %>
+      </div>
+
+      <div>
+        <%= form.label :time, style: "display: block" %>
+        <%= form.time_field :time %>
+      </div>
       <%= form.label :schedule, style: "display: block" %>
       <%= form.select :schedule, appointment.schedules.map{ |b| [b.day, b.id] } %>
     <% end %>
-
-    <div>
-      <%= form.label :date, style: "display: block" %>
-      <%= form.date_field :date %>
-    </div>
-
-    <div>
-      <%= form.label :time, style: "display: block" %>
-      <%= form.time_field :time %>
-    </div>
 
     <div>
       <%= form.label :motive, style: "display: block" %>

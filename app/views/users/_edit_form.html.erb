@@ -1,0 +1,54 @@
+<%= form_with(model: user) do |f| %>
+  <% if user.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+        <% user.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation%>
+  </div>
+
+  <div data-controller="form-element">
+
+    <div class="field">
+        <%= f.label :role, style: "display: block" %>
+        <%= f.select :role, User.roles.keys.reject{|enum| enum=="client"}.map{ |key, value| [key.humanize, key] }, {include_blank:true},{data:{action:"change->form-element#remotesubmit"}} %>
+    </div>
+    <%= f.button "See branches", formaction: edit_user_path, formmethod: :get, data:{ form_element_target:"submitbtn"}%>
+
+  </div>
+
+  <% if user.is_personal?%>
+    <div>
+        <%= f.label :branches, style: "display: block" %>
+        <%= collection_select(:user, :branch_id, Branch.all, :id, :name, prompt: true) %>
+    </div>
+  <% end %>
+
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+
+<% end %>

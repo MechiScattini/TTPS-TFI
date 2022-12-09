@@ -1,7 +1,8 @@
 class BranchesController < ApplicationController
   load_and_authorize_resource
   before_action :set_branch, only: %i[ show edit update destroy ]
-  before_action :check_appointments, only: %i[ destroy ]
+  before_action :check_appointments_and_personal, only: %i[ destroy ]
+  #before_action :check_personal, only: %i[ destroy ]
 
   # GET /branches or /branches.json
   def index
@@ -50,7 +51,9 @@ class BranchesController < ApplicationController
 
   # DELETE /branches/1 or /branches/1.json
   def destroy
+    # destruye las relaciones de sus schedules
     Schedule.delete(@branch.id)
+
     @branch.destroy
 
     respond_to do |format|
@@ -70,14 +73,18 @@ class BranchesController < ApplicationController
       params.require(:branch).permit(:name, :address, :telephone, :schedule_ids => [])
     end
 
-    def check_appointments
+    def check_appointments_and_personal
       respond_to do |format|
         if Appointment.all.select{|a| a.branch_id == @branch.id}.any?
           format.html { redirect_to branch_url(@branch), notice: "Branch cannot be destroyed, it has appointments." }
+          format.json { head :no_content }
+        elsif User.all.select{|u| u.branch_id == @branch.id}.any?
+          format.html { redirect_to branch_url(@branch), notice: "Branch cannot be destroyed, it has bank personal assigned." }
           format.json { head :no_content }
         else
           destroy
         end
       end
     end
+
 end

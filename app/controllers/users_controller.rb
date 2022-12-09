@@ -18,6 +18,7 @@ class UsersController < ApplicationController
 
   # GET /branches/1/edit
   def edit
+    @user.update(user_params)
   end
 
   # POST /branches or /branches.json

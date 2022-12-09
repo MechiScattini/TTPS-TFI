@@ -18,6 +18,7 @@ class AppointmentsController < ApplicationController
 
   # GET /appointments/1/edit
   def edit
+    @appointment.update(appointment_params)
   end
 
   # POST /appointments or /appointments.json
@@ -73,7 +74,6 @@ class AppointmentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def appointment_params
-      #params.require(:appointment).permit(:date, :time, :motive, :solved, :comment, :branch_id)
       params.fetch(:appointment,{}).permit(:date, :time, :motive, :solved, :comment, :branch_id, :schedule_id)
     end
 end
