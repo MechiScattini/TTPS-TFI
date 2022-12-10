@@ -1,24 +1,16 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Requisitos para correr la app
 
-Things you may want to cover:
+* Ruby version = 2.7.6
 
-* Ruby version
+* Rails version = 7.0.4
 
-* System dependencies
+*	Linux OS
 
-* Configuration
+Pasos para correr la app localmente
+Dentro de la carpeta del proyecto correr los siguientes comandos:
 
-* Database creation
+* rails db:seed
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* rails s
