@@ -19,6 +19,10 @@ class Appointment < ApplicationRecord
 		end
 	end
 
+	def bank_personal
+		User.all.select{|u| u.branch_id==self.branch_id}.first.email
+	end
+
 	def valid_date_time?
 		if self.date != nil and self.time != nil
 			if check_date

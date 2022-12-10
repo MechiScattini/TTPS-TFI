@@ -8,45 +8,57 @@
   <% end %>
 
   <table class="table table-striped table-bordered">
-    <thead>
-      <tr class="table-dark">
-        <th scope="col">#</th>
-        <th scope="col">Date</th>
-        <th scope="col">Time</th>
-        <th scope="col">Motive</th>
-        <th scope="col">Status</th>
-        <th scope="col">Comment</th>
-        <th scope="col">Branch</th>
-        <th scope="col">Address</th>
-        <th scope="col">Options</th>
-      </tr>
-    </thead>
 
-    <tbody>
-      <% if current_user.role == "client" %>
+    <% if current_user.role == "client" %>
+      <thead>
+        <tr class="table-dark">
+          <th scope="col">#</th>
+          <th scope="col">Date</th>
+          <th scope="col">Time</th>
+          <th scope="col">Branch</th>
+          <th scope="col">Address</th>
+          <th scope="col">Options</th>
+        </tr>
+      </thead>
+
+      <tbody>
         <% current_user.appointments.each_with_index do |appointment, index| %>
           <tr>
             <th scope="row"><%= index + 1 %></th>
             <td><%= appointment.date %></td>
-            <td><%= appointment.time %></td>
-            <td><%= appointment.motive %></td>
-            <% if appointment.solved %>
-              <td>solved</td>
-            <% else %>
-              <td>unsolved</td>
-            <% end %>
-            <td><%= appointment.comment %></td>
+            <td><%= appointment.time.strftime "%H:%M" %></td>
             <td><%= (Branch.find_by id: appointment.branch_id).name  %></td>
             <td><%= (Branch.find_by id: appointment.branch_id).address  %></td>
-            <td><%= link_to "Show this appointment", appointment %></td>
+            <td>
+              <%= link_to "Show this appointment", appointment %>
+              <% if !appointment.solved %>
+                <%= link_to "Edit this appointment", edit_appointment_path(appointment) %>
+                <%= button_to "Destroy this appointment", appointment, method: :delete %>
+              <% end %>
+            </td>
           </tr>
         <% end %>
-      <% else %>
+      </tbody>
+    <% else %>
+      <thead>
+        <tr class="table-dark">
+          <th scope="col">#</th>
+          <th scope="col">Date</th>
+          <th scope="col">Time</th>
+          <th scope="col">Motive</th>
+          <th scope="col">Status</th>
+          <th scope="col">Comment</th>
+          <th scope="col">Branch</th>
+          <th scope="col">Address</th>
+          <th scope="col">Options</th>
+        </tr>
+      </thead>
+      <tbody>
         <% @appointments.reject{|appointment| appointment.branch_id != current_user.branch_id}.each_with_index do |appointment, index| %>
           <tr>
             <th scope="row"><%= index + 1 %></th>
             <td><%= appointment.date %></td>
-            <td><%= appointment.time %></td>
+            <td><%= appointment.time.strftime "%H:%M" %></td>
             <td><%= appointment.motive %></td>
             <% if appointment.solved %>
               <td>solved</td>

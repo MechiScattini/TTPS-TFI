@@ -28,6 +28,12 @@
     <%= @appointment.comment %>
   </p>
 
+  <% if @appointment.solved %>
+    <p>
+      <strong>Personal: </strong>
+      <%= @appointment.bank_personal %>
+    </p>
+  <% end %>
 </div>
 
 <div>
