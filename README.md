@@ -14,3 +14,13 @@ Dentro de la carpeta del proyecto correr los siguientes comandos:
 * rails db:seed
 
 * rails s
+
+Para usar el sistema hay varios usuarios creados  
+Todos tienen contraseña: 123123  
+Los usuarios son los siguientes:  
+* Usuario administrador --> admin@mail.com  
+* Usuarios personal del banco --> bankPersonal1@mail.com y bankPersonal2@mail.com  
+* Usuarios clientes --> client1@mail.com y client2@mail.com  
+Se pueden crear mas usuarios cliente desde el sign up  
+Se pueden crear otros tipos de usuarios desde el panel del usuario administrador  
+El usuario administrador no puede eliminarse a sí mismo ni puede modificar datos de los usuarios clientes, a estos últimos solo puede eliminarlos  
