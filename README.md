@@ -1,6 +1,6 @@
 # README
 
-Requisitos para correr la app
+Requisitos para correr la app  
 
 * Ruby version = 2.7.6
 
@@ -8,8 +8,8 @@ Requisitos para correr la app
 
 *	Linux OS
 
-Pasos para correr la app localmente
-Dentro de la carpeta del proyecto correr los siguientes comandos:
+Pasos para correr la app localmente  
+Dentro de la carpeta del proyecto correr los siguientes comandos:  
 
 * rails db:seed
 
