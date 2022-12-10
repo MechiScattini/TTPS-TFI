@@ -10,13 +10,22 @@ Requisitos para correr la app
 
 *	Firefox
 
+* Git
+
 
 Pasos para correr la app localmente  
+Clonar el repo  
+* git clone git@github.com:MechiScattini/TTPS-TFI.git
+
 Dentro de la carpeta del proyecto correr los siguientes comandos:  
 
+Genera la base de datos con datos de prueba  
 * rails db:seed
 
+Corre el servidor local  
 * rails s
+
+
 
 Para acceder a la aplicación hay que entrar a la siguiente url desde el navegador Firefox
 *	http://127.0.0.1:3000/
