@@ -8,6 +8,9 @@ Requisitos para correr la app
 
 *	Linux OS
 
+*	Firefox
+
+
 Pasos para correr la app localmente  
 Dentro de la carpeta del proyecto correr los siguientes comandos:  
 
@@ -15,8 +18,11 @@ Dentro de la carpeta del proyecto correr los siguientes comandos:
 
 * rails s
 
-Para usar el sistema hay varios usuarios creados  
-Todos tienen contraseña: 123123  
+Para acceder a la aplicación hay que entrar a la siguiente url desde el navegador Firefox
+*	http://127.0.0.1:3000/
+
+En el sistema ya hay cargados varios usuarios  
+Todos tienen contraseña: "123123"  
 Los usuarios son los siguientes:  
 * Usuario administrador --> admin@mail.com  
 * Usuarios personal del banco --> bankPersonal1@mail.com y bankPersonal2@mail.com  
