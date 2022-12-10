@@ -62,7 +62,6 @@ class UsersController < ApplicationController
   protected
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:role])
-    # devise_parameter_sanitizer.for(:account_update) {| u | u.permit(:role, :email, :password, :current_password) }
   end
 
   private

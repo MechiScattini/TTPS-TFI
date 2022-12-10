@@ -21,6 +21,26 @@
       </div>
 
     <%if appointment.schedules.any? %>
+      <%= form.label :schedules, "Schedules from branch" %>
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr class="table-dark">
+            <th scope="col">Day</th>
+            <th scope="col">Time from</th>
+            <th scope="col">Time to</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% appointment.schedules.each do |schedule| %>
+            <tr>
+              <td><%= schedule.day %></td>
+              <td><%= schedule.time_from.strftime "%H:%M" %></td>
+              <td><%= schedule.time_to.strftime "%H:%M" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
       <div>
         <%= form.label :date, style: "display: block" %>
         <%= form.date_field :date %>
@@ -30,8 +50,7 @@
         <%= form.label :time, style: "display: block" %>
         <%= form.time_field :time %>
       </div>
-      <%= form.label :schedule, style: "display: block" %>
-      <%= form.select :schedule, appointment.schedules.map{ |b| [b.day, b.id] } %>
+
     <% end %>
 
     <div>
