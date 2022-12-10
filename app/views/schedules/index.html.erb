@@ -21,7 +21,11 @@
             <td><%= schedule.day %></td>
             <td><%= schedule.time_from.strftime "%H:%M" %></td>
             <td><%= schedule.time_to.strftime "%H:%M" %></td>
-            <td><%= link_to "Show this schedule", schedule %></td>
+            <td>
+              <%= link_to "Show this schedule", schedule %>
+              <%= link_to "Edit this schedule", edit_schedule_path(schedule) %> |
+              <%= button_to "Destroy this schedule", schedule, method: :delete %>
+            </td>
           </tr>
       <% end %>
     </tbody>

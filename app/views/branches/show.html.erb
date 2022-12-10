@@ -2,12 +2,17 @@
 
 <%= render @branch %>
 
+  <strong>Branch personal: </strong>
+  <ul>
+    <% @branch.personal.each_with_index do |personal, index| %>
+        <li><%= personal.email %></li>
+    <% end %>
+  </ul>
+
 <div>
   <% if current_user.role == "admin" %>
     <%= link_to "Edit this branch", edit_branch_path(@branch) %> |
-    <% if !Appointment.all.select{|a| a.branch_id == @branch.id}.any? %>
-      <%= button_to "Destroy this branch", @branch, method: :delete %>
-    <% end %>
+    <%= button_to "Destroy this branch", @branch, method: :delete %>
   <% end %>
 
   <%= link_to "Back to branches", branches_path %>

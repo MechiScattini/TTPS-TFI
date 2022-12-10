@@ -1,10 +1,17 @@
-<h1>Home#index</h1>
-<% if current_user %>
-	<p>You are a [<%= current_user.role %>]</p>
-	<% if current_user.role == "bank_personal" %>
-	<% Branch.all.reject{ |branch| branch.id != current_user.branch_id}.each do |branch| %>
-		<p>Your branch is [<%= branch.name %>]</p>
-	<%end%>
 
+<% if current_user %>
+<strong>Nice!</strong>
+	<p>You are a user with [<%= current_user.role %>] role</p>
+	<% if current_user.role == "bank_personal" %>
+		<% Branch.all.reject{ |branch| branch.id != current_user.branch_id}.each do |branch| %>
+			<p>Your branch is [<%= branch.name %>]</p>
+		<%end%>
 	<% end%>
+	<% if current_user.role == "client" %>
+		<p>You can see your appointments or make a new one in the appointments link above </p>
+	<% end%>
+<% else %>
+<h1>Welcome to my TFI</h1>
+<p>You can do stuff if you Log in :) </p>
+<p>If you don't have an account you can Sign in!</p>
 <% end %>
