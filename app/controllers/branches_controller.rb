@@ -2,7 +2,6 @@ class BranchesController < ApplicationController
   load_and_authorize_resource
   before_action :set_branch, only: %i[ show edit update destroy ]
   before_action :check_appointments_and_personal, only: %i[ destroy ]
-  #before_action :check_personal, only: %i[ destroy ]
 
   # GET /branches or /branches.json
   def index
@@ -75,8 +74,8 @@ class BranchesController < ApplicationController
 
     def check_appointments_and_personal
       respond_to do |format|
-        if Appointment.all.select{|a| a.branch_id == @branch.id}.any?
-          format.html { redirect_to branch_url(@branch), notice: "Branch cannot be destroyed, it has appointments." }
+        if Appointment.all.select{|a| a.branch_id == @branch.id and !a.solved? }.any?
+          format.html { redirect_to branch_url(@branch), notice: "Branch cannot be destroyed, it has unsolved appointments." }
           format.json { head :no_content }
         elsif User.all.select{|u| u.branch_id == @branch.id}.any?
           format.html { redirect_to branch_url(@branch), notice: "Branch cannot be destroyed, it has bank personal assigned." }
