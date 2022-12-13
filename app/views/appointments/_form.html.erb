@@ -15,7 +15,7 @@
       <div data-controller="form-element">
         <div class="field">
             <%= form.label :branches, style: "display: block" %>
-            <%= form.select :branch_id, Branch.all.map{ |b| [b.name, b.id] }, {include_blank:true},{data:{action:"change->form-element#remotesubmit"}} %>
+            <%= form.select :branch_id, Branch.all.map{ |b| [b.name, b.id] }, {include_blank:true}, {data:{action:"change->form-element#remotesubmit"}} %>
         </div>
         <%= form.button "A", formaction: new_appointment_path, formmethod: :get, data:{ form_element_target:"submitbtn"}%>
       </div>

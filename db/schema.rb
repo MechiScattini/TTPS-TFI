@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_13_200709) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_13_202803) do
   create_table "Appointments", force: :cascade do |t|
     t.date "date"
     t.time "time"
@@ -32,6 +32,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_13_200709) do
     t.index ["name"], name: "index_Branches_on_name", unique: true
   end
 
+  create_table "Schedules", force: :cascade do |t|
+    t.integer "day", null: false
+    t.time "time_from", null: false
+    t.time "time_to", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "appointments_users", id: false, force: :cascade do |t|
     t.integer "appointment_id", null: false
     t.integer "user_id", null: false
@@ -40,14 +48,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_13_200709) do
   create_table "branches_schedules", id: false, force: :cascade do |t|
     t.integer "branch_id", null: false
     t.integer "schedule_id", null: false
-  end
-
-  create_table "schedules", force: :cascade do |t|
-    t.integer "day"
-    t.time "time_from"
-    t.time "time_to"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

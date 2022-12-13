@@ -13,7 +13,7 @@
 
   <div class="field">
       <%= form.label :day, style: "display: block" %>
-      <%= form.select :day, Schedule.days.keys.map{ |key, value| [key.humanize, key] } %>
+      <%= form.select :day, Schedule.days.keys.map{ |key, value| [key.humanize, key] }, {include_blank:true} %>
   </div>
 
   <div>
