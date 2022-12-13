@@ -3,7 +3,6 @@ class Appointment < ApplicationRecord
 	validates :date, comparison: {greater_than: Date.today}
 	validates :comment, presence: true, if: :solved?
 	validate :valid_date_time?, on: :create
-	#validate :valid_time?, on: :create
 	has_and_belongs_to_many :users
 	belongs_to :branch
 
