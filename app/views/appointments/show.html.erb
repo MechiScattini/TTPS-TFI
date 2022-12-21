@@ -3,7 +3,7 @@
 <div>
   <p>
     <strong>Branch: </strong>
-    <%= (Branch.find_by id: @appointment.branch_id).name  %>
+    <%= get_branch_by_id(@appointment.branch_id).name  %>
   </p>
   <p>
     <strong>Date: </strong>

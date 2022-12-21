@@ -3,7 +3,7 @@
 <strong>Nice!</strong>
 	<p>You are a user with [<%= current_user.role %>] role</p>
 	<% if current_user.role == "bank_personal" %>
-		<% Branch.all.reject{ |branch| branch.id != current_user.branch_id}.each do |branch| %>
+		<% get_all_branches.reject{ |branch| branch.id != current_user.branch_id}.each do |branch| %>
 			<p>Your branch is [<%= branch.name %>]</p>
 		<%end%>
 	<% end%>

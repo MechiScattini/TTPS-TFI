@@ -28,7 +28,7 @@
 
   <div>
     <%= form.label :schedules, style: "display: block" %>
-    <% for schedule in Schedule.all %>
+    <% for schedule in get_all_schedules %>
       <%= check_box_tag "branch[schedule_ids][]", schedule.id, @branch.schedules.include?(schedule) %>
       Day:
       <%=h schedule.day%>

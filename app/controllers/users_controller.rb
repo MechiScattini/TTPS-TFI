@@ -59,6 +59,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def get_all_branches
+    Branch.all
+  end
+  helper_method :get_all_branches
+
+  def get_user_roles
+    User.roles
+  end
+  helper_method :get_user_roles
+
   protected
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:role])

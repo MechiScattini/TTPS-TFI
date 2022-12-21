@@ -65,6 +65,15 @@ class AppointmentsController < ApplicationController
     end
   end
 
+  def get_branch_by_id(branch_id)
+    Branch.find_by id: branch_id
+  end
+  helper_method :get_branch_by_id
+
+  def get_all_branches
+    Branch.all
+  end
+  helper_method :get_all_branches
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -58,6 +58,11 @@ class SchedulesController < ApplicationController
     end
   end
 
+  def get_days
+    Schedule.days
+  end
+  helper_method :get_days
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_schedule

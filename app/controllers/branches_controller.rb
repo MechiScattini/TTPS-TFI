@@ -61,6 +61,11 @@ class BranchesController < ApplicationController
     end
   end
 
+  def get_all_schedules
+    Schedule.all
+  end
+  helper_method :get_all_schedules
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_branch

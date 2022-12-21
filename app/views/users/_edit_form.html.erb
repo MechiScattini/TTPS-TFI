@@ -15,7 +15,7 @@
 
     <div class="field">
         <%= f.label :role, style: "display: block" %>
-        <%= f.select :role, User.roles.keys.reject{|enum| enum=="client"}.map{ |key, value| [key.humanize, key] }, {include_blank:true},{data:{action:"change->form-element#remotesubmit"}} %>
+        <%= f.select :role, get_user_roles.keys.reject{|enum| enum=="client"}.map{ |key, value| [key.humanize, key] }, {include_blank:true},{data:{action:"change->form-element#remotesubmit"}} %>
     </div>
     <%= f.button "See branches", formaction: edit_user_path, formmethod: :get, data:{ form_element_target:"submitbtn"}%>
 
@@ -24,7 +24,7 @@
   <% if user.is_personal?%>
     <div>
         <%= f.label :branches, style: "display: block" %>
-        <%= collection_select(:user, :branch_id, Branch.all, :id, :name, prompt: true) %>
+        <%= collection_select(:user, :branch_id, get_all_branches, :id, :name, prompt: true) %>
     </div>
   <% end %>
 
